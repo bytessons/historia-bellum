@@ -72,7 +72,7 @@ function RouteAnimation({ event }) {
 export default function MapView({ events, activeEventId, onEventSelect, onStackSelect, activeEvent, activeStack, persons = [], activePersonId, onPersonSelect }) {
   const allMarkers = [
     ...events.map(e => ({ ...e, _kind: 'event' })),
-    ...persons.map(p => ({ ...p, _kind: 'person' })),
+    ...persons.filter(p => p.lat != null && p.lng != null).map(p => ({ ...p, _kind: 'person' })),
   ];
   const locationGroups = groupByLocation(allMarkers);
   const activeStackKey = activeStack ? `${activeStack[0].lat},${activeStack[0].lng}` : null;
