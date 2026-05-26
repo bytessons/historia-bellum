@@ -1,0 +1,55 @@
+.filter-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 24px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.filter-label {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-right: 4px;
+}
+
+.filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 3px;
+  border: 1px solid var(--border-subtle);
+  background: transparent;
+  color: var(--text-muted);
+  font-family: 'EB Garamond', serif;
+  font-size: 13px;
+  transition: all 0.15s;
+  opacity: 0.5;
+}
+
+.filter-btn.active {
+  opacity: 1;
+  color: var(--text-body);
+  border-color: var(--border);
+}
+
+.filter-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.filter-btn--battle .filter-dot { background: var(--color-battle); }
+.filter-btn--event .filter-dot  { background: var(--color-event); }
+.filter-btn--person .filter-dot { background: var(--color-person); }
+
+.filter-btn--battle.active { border-color: var(--color-battle); }
+.filter-btn--event.active  { border-color: var(--color-event); }
+.filter-btn--person.active { border-color: var(--color-person); }

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Historia Bellum – Prototyp</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  font-family: 'EB Garamond', serif;
+  background: #1a1610;
+  color: #e8dfc8;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.top-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 20px;
+  border-bottom: 0.5px solid #4a3f2a;
+  background: #12100c;
+  flex-shrink: 0;
+}
+.logo {
+  font-family: 'Cinzel', serif;
+  font-size: 15px;
+  color: #c9a84c;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.era-pills { display: flex; gap: 6px; flex: 1; flex-wrap: wrap; }
+.era-pill {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  border: 0.5px solid #4a3f2a;
+  background: transparent;
+  color: #a09070;
+  cursor: pointer;
+  font-family: 'EB Garamond', serif;
+  transition: all 0.2s;
+}
+.era-pill:hover, .era-pill.active { background: #2a2218; color: #c9a84c; border-color: #c9a84c; }
+.country-tag {
+  font-size: 11px;
+  color: #6a5a40;
+  border: 0.5px solid #4a3f2a;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+.filter-row {
+  display: flex;
+  gap: 6px;
+  padding: 8px 20px;
+  border-bottom: 0.5px solid #4a3f2a;
+  background: #0e0d0a;
+  flex-shrink: 0;
+}
+.filter-btn {
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  border: 0.5px solid #2a2218;
+  background: transparent;
+  color: #6a5a40;
+  cursor: pointer;
+  font-family: 'EB Garamond', serif;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s;
+}
+.filter-btn:hover { border-color: #4a3f2a; color: #a09070; }
+.filter-btn.on { border-color: currentColor; }
+.filter-btn.battles.on { color: #cc4444; }
+.filter-btn.events.on { color: #7a9a4a; }
+.filter-btn.persons.on { color: #4a9aad; }
+.f-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.battles .f-dot { background: #cc4444; }
+.events .f-dot { background: #7a9a4a; }
+.persons .f-dot { background: #4a9aad; }
+.main { display: flex; flex: 1; overflow: hidden; }
+.map-area { flex: 1; position: relative; overflow: hidden; background: #1a1610; }
+#map-svg { width: 100%; height: 100%; }
+.marker { cursor: pointer; }
+.marker-dot { stroke: #1a1610; stroke-width: 1.5; }
+.marker-dot.battle { fill: #cc4444; }
+.marker-dot.event { fill: #7a9a4a; }
+.marker-dot.person { fill: #4a9aad; }
+.marker-label { font-family: 'EB Garamond', serif; font-size: 11px; fill: #c8b890; pointer-events: none; }
+.sidebar {
+  width: 300px;
+  background: #12100c;
+  border-left: 0.5px solid #4a3f2a;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.sidebar-header {
+  padding: 16px 20px;
+  border-bottom: 0.5px solid #4a3f2a;
+}
+.sidebar-title { font-family: 'Cinzel', serif; font-size: 16px; color: #c9a84c; margin-bottom: 4px; }
+.sidebar-sub { font-size: 13px; color: #6a5a40; font-style: italic; }
+.detail-panel { flex: 1; padding: 20px; overflow-y: auto; }
+.detail-panel::-webkit-scrollbar { width: 3px; }
+.detail-panel::-webkit-scrollbar-track { background: #1a1610; }
+.detail-panel::-webkit-scrollbar-thumb { background: #4a3f2a; }
+.event-detail { display: none; }
+.event-detail.visible { display: block; }
+.detail-type-badge {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #c9a84c;
+  font-family: 'Cinzel', serif;
+  margin-bottom: 8px;
+}
+.detail-type-badge.battle { color: #cc4444; }
+.detail-type-badge.person { color: #4a9aad; }
+.detail-type-badge.event { color: #7a9a4a; }
+.detail-name { font-family: 'Cinzel', serif; font-size: 19px; color: #e8dfc8; margin-bottom: 4px; line-height: 1.3; }
+.detail-date { font-size: 13px; color: #6a5a40; font-style: italic; margin-bottom: 16px; }
+.detail-text { font-size: 15px; line-height: 1.8; color: #b8aa8a; }
+.detail-divider { border: none; border-top: 0.5px solid #2a2218; margin: 16px 0; }
+.related-label { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: #4a3f2a; font-family: 'Cinzel', serif; margin-bottom: 10px; }
+.related-person {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 0.5px solid #2a2218;
+}
+.rp-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: #2a2218;
+  border: 0.5px solid #4a3f2a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #c9a84c;
+  font-family: 'Cinzel', serif;
+  flex-shrink: 0;
+}
+.rp-name { font-size: 14px; color: #e8dfc8; }
+.rp-role { font-size: 12px; color: #6a5a40; font-style: italic; }
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #4a3f2a;
+  text-align: center;
+  gap: 12px;
+}
+.empty-icon { font-size: 28px; opacity: 0.5; }
+.empty-text { font-size: 14px; font-style: italic; line-height: 1.7; max-width: 200px; }
+.timeline-bar {
+  padding: 10px 20px 14px;
+  border-top: 0.5px solid #4a3f2a;
+  background: #0e0d0a;
+  flex-shrink: 0;
+}
+.timeline-label { font-size: 10px; letter-spacing: 1px; color: #4a3f2a; font-family: 'Cinzel', serif; margin-bottom: 8px; }
+.timeline-track { position: relative; height: 20px; display: flex; align-items: center; margin-bottom: 20px; }
+.timeline-line { position: absolute; left: 0; right: 0; height: 0.5px; background: #2a2218; }
+.tl-event {
+  position: absolute;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  transform: translateX(-50%);
+  transition: transform 0.15s;
+}
+.tl-event:hover { transform: translateX(-50%) scale(1.6); }
+.tl-event.battle { background: #cc4444; }
+.tl-event.event { background: #7a9a4a; }
+.tl-label {
+  position: absolute;
+  font-size: 9px;
+  color: #4a3f2a;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  top: 14px;
+  font-family: 'Cinzel', serif;
+}
+.legend { display: flex; gap: 14px; margin-top: 4px; }
+.legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #4a3f2a; }
+.legend-dot { width: 7px; height: 7px; border-radius: 50%; }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <span class="logo">Historia Bellum</span>
+  <div class="era-pills">
+    <button class="era-pill active" onclick="setEra('all', this)">Alla eror</button>
+    <button class="era-pill" onclick="setEra('vikingatid', this)">Vikingatid</button>
+    <button class="era-pill" onclick="setEra('stormaktstid', this)">Stormaktstid</button>
+  </div>
+  <span class="country-tag">SVERIGE</span>
+</div>
+
+<div class="filter-row">
+  <button class="filter-btn battles on" onclick="toggleFilter('battles', this)">
+    <span class="f-dot"></span> Slag
+  </button>
+  <button class="filter-btn events on" onclick="toggleFilter('events', this)">
+    <span class="f-dot"></span> Händelser
+  </button>
+  <button class="filter-btn persons on" onclick="toggleFilter('persons', this)">
+    <span class="f-dot"></span> Nyckelpersoner
+  </button>
+</div>
+
+<div class="main">
+  <div class="map-area">
+    <svg id="map-svg" viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <!-- Background -->
+      <rect width="600" height="700" fill="#1a1610"/>
+
+      <!-- Grid lines -->
+      <line x1="0" y1="200" x2="600" y2="200" stroke="#221f18" stroke-width="0.5" stroke-dasharray="4,10"/>
+      <line x1="0" y1="350" x2="600" y2="350" stroke="#221f18" stroke-width="0.5" stroke-dasharray="4,10"/>
+      <line x1="0" y1="500" x2="600" y2="500" stroke="#221f18" stroke-width="0.5" stroke-dasharray="4,10"/>
+      <line x1="150" y1="0" x2="150" y2="700" stroke="#221f18" stroke-width="0.5" stroke-dasharray="4,10"/>
+      <line x1="300" y1="0" x2="300" y2="700" stroke="#221f18" stroke-width="0.5" stroke-dasharray="4,10"/>
+      <line x1="450" y1="0" x2="450" y2="700" stroke="#221f18" stroke-width="0.5" stroke-dasharray="4,10"/>
+
+      <!-- Norway -->
+      <path d="M120,80 L155,60 L200,65 L195,100 L185,140 L175,180 L162,220 L150,260 L138,300 L125,340 L112,380 L106,420 L110,455 L124,465 L142,458 L158,448 L172,458 L178,478 L172,500 L158,512 L140,510 L122,498 L108,478 L98,452 L100,415 L108,378 L118,338 L128,298 L132,255 L130,210 L125,165 L120,120Z" fill="#1d1b12" stroke="#383020" stroke-width="0.8"/>
+
+      <!-- Sweden -->
+      <path d="M200,65 L240,55 L280,48 L320,52 L358,62 L375,82 L368,112 L385,138 L402,168 L415,200 L425,232 L435,265 L445,298 L455,330 L462,362 L460,398 L448,430 L435,460 L415,482 L392,496 L368,508 L344,518 L318,528 L292,536 L268,534 L250,520 L235,502 L220,482 L208,460 L200,438 L194,408 L188,375 L183,340 L178,305 L174,268 L174,230 L177,195 L183,162 L190,130 L195,100 L200,65Z" fill="#24200f" stroke="#4a3f25" stroke-width="1.2"/>
+
+      <!-- Finland -->
+      <path d="M358,62 L408,52 L455,65 L495,90 L520,120 L535,158 L540,196 L535,234 L522,265 L505,290 L485,308 L462,322 L462,298 L455,265 L445,232 L435,200 L420,168 L400,138 L385,112 L375,82Z" fill="#1d1b12" stroke="#383020" stroke-width="0.8"/>
+
+      <!-- Denmark (Jutland) -->
+      <path d="M215,500 L232,518 L248,535 L256,552 L252,568 L240,574 L226,568 L215,552 L210,532 L215,515Z" fill="#24200f" stroke="#4a3f25" stroke-width="0.8"/>
+      <path d="M256,552 L278,556 L298,568 L304,585 L296,596 L278,598 L260,588 L250,574 L250,560Z" fill="#24200f" stroke="#4a3f25" stroke-width="0.8"/>
+
+      <!-- Sea labels -->
+      <text x="60" y="350" font-family="Cinzel, serif" font-size="11" fill="#2a2218" letter-spacing="2">NORDSJÖN</text>
+      <text x="480" y="280" font-family="Cinzel, serif" font-size="10" fill="#2a2218" letter-spacing="1">ÖSTERSJÖN</text>
+      <text x="130" y="30" font-family="Cinzel, serif" font-size="9" fill="#2a2218" letter-spacing="2">NORRA ISHAVET</text>
+
+      <!-- Country labels -->
+      <text x="148" y="280" font-family="Cinzel, serif" font-size="13" fill="#3a3020" letter-spacing="1" transform="rotate(-70, 148, 280)">NORGE</text>
+      <text x="295" y="290" font-family="Cinzel, serif" font-size="15" fill="#5a4a28" letter-spacing="2">SVERIGE</text>
+      <text x="490" y="180" font-family="Cinzel, serif" font-size="11" fill="#3a3020" letter-spacing="1" transform="rotate(15, 490, 180)">FINLAND</text>
+
+      <!-- Markers layer -->
+      <g id="markers-layer"></g>
+    </svg>
+  </div>
+
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">Sverige</div>
+      <div class="sidebar-sub">Välj ett märke på kartan</div>
+    </div>
+    <div class="detail-panel" id="detail-panel">
+      <div class="empty-state" id="empty-state">
+        <div class="empty-icon">⚔</div>
+        <div class="empty-text">Klicka på ett märke på kartan för att läsa mer</div>
+      </div>
+      <div class="event-detail" id="event-detail">
+        <div class="detail-type-badge" id="d-type">Slag</div>
+        <div class="detail-name" id="d-name"></div>
+        <div class="detail-date" id="d-date"></div>
+        <div class="detail-text" id="d-text"></div>
+        <hr class="detail-divider" id="d-div1" style="display:none">
+        <div id="d-related-persons"></div>
+      </div>
+    </div>
+
+    <div class="timeline-bar">
+      <div class="timeline-label">TIDSLINJE · SVERIGE</div>
+      <div class="timeline-track">
+        <div class="timeline-line"></div>
+        <div id="tl-events" style="position:absolute;left:0;right:0;top:0;bottom:0;"></div>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#cc4444"></div>Slag</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#7a9a4a"></div>Händelse</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#4a9aad"></div>Person</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const DATA = [
+  {
+    id: 1, type: 'battle', era: 'vikingatid',
+    name: 'Slaget vid Bråvalla', date: 'ca 750 e.Kr.', year: 750,
+    x: 310, y: 450,
+    text: 'Ett av de mest omskrivna slagen i nordisk historia, utkämpat på Bråvallaheden i Östergötland. Kung Harald Hildetand mötte sin brorson Sigurd Ring. Berättat i Gesta Danorum av Saxo Grammaticus och i flera fornnordiska sagor.',
+    persons: [
+      { initials: 'HH', name: 'Harald Hildetand', role: 'Kung av Danmark och Sverige' },
+      { initials: 'SR', name: 'Sigurd Ring', role: 'Upprorsledare, segerrik kung' }
+    ]
+  },
+  {
+    id: 2, type: 'battle', era: 'stormaktstid',
+    name: 'Slaget vid Narva', date: '20 november 1700', year: 1700,
+    x: 488, y: 200,
+    text: 'En av Karl XII:s mest spektakulära segrar. Med bara 10 000 man besegrades en rysk armé på 40 000 under Peter den Store. Segern befäste Sveriges stormaktsstatus men gav Peter tid att reformera sin armé.',
+    persons: [
+      { initials: 'K12', name: 'Karl XII', role: 'Kung av Sverige' },
+      { initials: 'PdS', name: 'Peter den Store', role: 'Tsar av Ryssland' }
+    ]
+  },
+  {
+    id: 3, type: 'battle', era: 'stormaktstid',
+    name: 'Slaget vid Poltava', date: '8 juli 1709', year: 1709,
+    x: 545, y: 330,
+    text: 'Stormaktstidens fall. Karl XII:s armé krossades av Ryssland utanför Poltava. Sverige förlorade 9 000 man, ytterligare 14 000 kapitulerade. Karl flydde till det Osmanska riket och det svenska imperiet var förlorat.',
+    persons: [
+      { initials: 'K12', name: 'Karl XII', role: 'Kung av Sverige, besegrad' },
+      { initials: 'PdS', name: 'Peter den Store', role: 'Tsar av Ryssland, segrare' }
+    ]
+  },
+  {
+    id: 4, type: 'event', era: 'stormaktstid',
+    name: 'Stockholms blodbad', date: '8–9 november 1520', year: 1520,
+    x: 320, y: 418,
+    text: 'Kung Kristian II av Danmark lät avrätta uppemot 90 personer på Stortorget i Stockholm. Händelsen utlöste det uppror som ledde till Gustav Vasas makttillträde och Sveriges frigörelse från Kalmarunionen 1523.',
+    persons: [
+      { initials: 'K2', name: 'Kristian II', role: 'Kung av Danmark, beordrade massakern' },
+      { initials: 'GV', name: 'Gustav Vasa', role: 'Ledde upproret som följde' }
+    ]
+  },
+  {
+    id: 5, type: 'event', era: 'vikingatid',
+    name: 'Birka grundas', date: 'ca 750 e.Kr.', year: 748,
+    x: 322, y: 408,
+    text: 'Birka på Björkö i Mälaren grundas och blir Skandinaviens första stad och ett centralt handelscentrum. Platsen länkade handelsvägar från Ryssland och Bysans till Västeuropa och övergavs runt år 975 e.Kr.',
+    persons: [
+      { initials: 'AN', name: 'Ansgar', role: 'Missionär, besökte Birka år 829' }
+    ]
+  },
+  {
+    id: 6, type: 'person', era: 'stormaktstid',
+    name: 'Karl XII', date: '1682–1718', year: 1700,
+    x: 290, y: 465,
+    text: 'Kung av Sverige 1697–1718. Ledde Sverige under Stora Nordiska kriget. Känd för militärt lysande men strategiskt kostsamma fälttåg. Sköts vid belägringen av Fredrikshald i Norge 1718 under oklara omständigheter.',
+    persons: []
+  },
+  {
+    id: 7, type: 'battle', era: 'stormaktstid',
+    name: 'Slaget vid Lund', date: '4 december 1676', year: 1676,
+    x: 272, y: 520,
+    text: 'Det blodigaste slaget i Skandinaviens historia. Karl XI mötte Danmark utanför Lund. Uppskattningsvis 9 000 soldater dödades på några timmar. Sverige segrade och behöll kontrollen över Skåne och Blekinge.',
+    persons: [
+      { initials: 'K11', name: 'Karl XI', role: 'Kung av Sverige, segrare' },
+      { initials: 'K5', name: 'Kristian V', role: 'Kung av Danmark, besegrad' }
+    ]
+  },
+  {
+    id: 8, type: 'event', era: 'vikingatid',
+    name: 'Rurik grundar Novgorod', date: 'ca 862 e.Kr.', year: 862,
+    x: 502, y: 262,
+    text: 'Den svenske vikingen Rurik kallas in som furste av Novgorod och lägger grunden till det ryska riket. Varjagerna – östliga vikingar – etablerade handelsvägar från Östersjön ned till Konstantinopel längs de ryska floderna.',
+    persons: [
+      { initials: 'RR', name: 'Rurik', role: 'Varjagfurste, grundare av Rus' }
+    ]
+  }
+];
+
+let activeFilters = { battles: true, events: true, persons: true };
+let activeEra = 'all';
+let activeId = null;
+
+function yearRange() {
+  const y = DATA.map(d => d.year);
+  return [Math.min(...y), Math.max(...y)];
+}
+
+function yearPct(year) {
+  const [min, max] = yearRange();
+  return ((year - min) / (max - min)) * 100;
+}
+
+function renderMarkers() {
+  const ns = 'http://www.w3.org/2000/svg';
+  const layer = document.getElementById('markers-layer');
+  layer.innerHTML = '';
+
+  DATA.forEach(d => {
+    const typeKey = d.type === 'battle' ? 'battles' : d.type === 'person' ? 'persons' : 'events';
+    if (!activeFilters[typeKey]) return;
+    if (activeEra !== 'all' && d.era !== activeEra) return;
+
+    const g = document.createElementNS(ns, 'g');
+    g.setAttribute('class', 'marker');
+    g.setAttribute('transform', `translate(${d.x},${d.y})`);
+
+    if (activeId === d.id) {
+      const pulse = document.createElementNS(ns, 'circle');
+      pulse.setAttribute('r', '14');
+      const cols = { battle: '#cc4444', event: '#7a9a4a', person: '#4a9aad' };
+      pulse.setAttribute('fill', 'none');
+      pulse.setAttribute('stroke', cols[d.type]);
+      pulse.setAttribute('stroke-width', '1');
+      pulse.setAttribute('opacity', '0.5');
+      g.appendChild(pulse);
+    }
+
+    const c = document.createElementNS(ns, 'circle');
+    c.setAttribute('r', activeId === d.id ? '9' : '7');
+    c.setAttribute('class', 'marker-dot ' + d.type);
+    g.appendChild(c);
+
+    const t = document.createElementNS(ns, 'text');
+    t.setAttribute('x', '12');
+    t.setAttribute('y', '4');
+    t.setAttribute('class', 'marker-label');
+    t.textContent = d.name.length > 24 ? d.name.slice(0, 22) + '…' : d.name;
+    g.appendChild(t);
+
+    g.addEventListener('click', () => selectItem(d.id));
+    layer.appendChild(g);
+  });
+}
+
+function renderTimeline() {
+  const tl = document.getElementById('tl-events');
+  tl.innerHTML = '';
+  const shown = DATA.filter(d => {
+    if (d.type === 'person') return false;
+    const typeKey = d.type === 'battle' ? 'battles' : 'events';
+    if (!activeFilters[typeKey]) return false;
+    if (activeEra !== 'all' && d.era !== activeEra) return false;
+    return true;
+  });
+  shown.forEach(d => {
+    const pct = yearPct(d.year);
+    const dot = document.createElement('div');
+    dot.className = 'tl-event ' + d.type;
+    dot.style.left = pct + '%';
+    dot.style.top = '50%';
+    dot.style.transform = 'translate(-50%,-50%)';
+    dot.style.position = 'absolute';
+    dot.title = d.name;
+    dot.addEventListener('click', () => selectItem(d.id));
+    tl.appendChild(dot);
+
+    const lbl = document.createElement('div');
+    lbl.className = 'tl-label';
+    lbl.style.left = pct + '%';
+    lbl.style.position = 'absolute';
+    lbl.style.top = '14px';
+    lbl.style.transform = 'translateX(-50%)';
+    lbl.textContent = d.year;
+    tl.appendChild(lbl);
+  });
+}
+
+function selectItem(id) {
+  activeId = id;
+  const d = DATA.find(x => x.id === id);
+  if (!d) return;
+  document.getElementById('empty-state').style.display = 'none';
+  const det = document.getElementById('event-detail');
+  det.style.display = 'block';
+
+  const badge = document.getElementById('d-type');
+  badge.textContent = { battle: 'Slag', event: 'Händelse', person: 'Person' }[d.type];
+  badge.className = 'detail-type-badge ' + d.type;
+  document.getElementById('d-name').textContent = d.name;
+  document.getElementById('d-date').textContent = d.date;
+  document.getElementById('d-text').textContent = d.text;
+
+  const relDiv = document.getElementById('d-related-persons');
+  const div1 = document.getElementById('d-div1');
+  if (d.persons && d.persons.length > 0) {
+    div1.style.display = '';
+    relDiv.innerHTML = '<div class="related-label">Nyckelpersoner</div>' +
+      d.persons.map(p => `
+        <div class="related-person">
+          <div class="rp-avatar">${p.initials}</div>
+          <div><div class="rp-name">${p.name}</div><div class="rp-role">${p.role}</div></div>
+        </div>`).join('');
+  } else {
+    div1.style.display = 'none';
+    relDiv.innerHTML = '';
+  }
+  renderMarkers();
+  renderTimeline();
+}
+
+function setEra(era, btn) {
+  activeEra = era;
+  document.querySelectorAll('.era-pill').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeId = null;
+  document.getElementById('empty-state').style.display = '';
+  document.getElementById('event-detail').style.display = 'none';
+  renderMarkers();
+  renderTimeline();
+}
+
+function toggleFilter(type, btn) {
+  activeFilters[type] = !activeFilters[type];
+  btn.classList.toggle('on', activeFilters[type]);
+  renderMarkers();
+  renderTimeline();
+}
+
+renderMarkers();
+renderTimeline();
+</script>
+</body>
+</html>

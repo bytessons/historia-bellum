@@ -1,0 +1,1089 @@
+{
+  "module": "sweden",
+  "country": {
+    "id": "se",
+    "name": "Sverige",
+    "defaultView": {
+      "lat": 62,
+      "lng": 17,
+      "zoom": 5
+    }
+  },
+  "eras": [
+    {
+      "id": "frigoerelsen",
+      "label": "Frigörelsen",
+      "from": 1520,
+      "to": 1560
+    },
+    {
+      "id": "expansion",
+      "label": "Expansion",
+      "from": 1560,
+      "to": 1630
+    },
+    {
+      "id": "stormakt",
+      "label": "Stormaktstid",
+      "from": 1630,
+      "to": 1718
+    },
+    {
+      "id": "fall",
+      "label": "Stormaktens fall",
+      "from": 1718,
+      "to": 1721
+    },
+    {
+      "id": "frihetstid",
+      "label": "Frihetstid",
+      "from": 1721,
+      "to": 1772
+    },
+    {
+      "id": "gustaviansk",
+      "label": "Gustaviansk tid",
+      "from": 1772,
+      "to": 1809
+    },
+    {
+      "id": "slutet",
+      "label": "Mot freden",
+      "from": 1809,
+      "to": 1814
+    }
+  ],
+  "persons": [
+    {
+      "id": "se_p001",
+      "name": "Gustav Vasa",
+      "born": 1496,
+      "died": 1560,
+      "initials": "GV",
+      "description": "Kung av Sverige 1523–1560. Ledde upproret mot Danmark efter Stockholms blodbad, bröt Sverige ur Kalmarunionen och grundade i praktiken det moderna Sverige. Genomförde även reformationen och gjorde kyrkan statlig."
+    },
+    {
+      "id": "se_p002",
+      "name": "Kristian II",
+      "born": 1481,
+      "died": 1559,
+      "initials": "K2",
+      "description": "Kung av Danmark, Norge och Sverige. Beordrade Stockholms blodbad 1520 i ett försök att befästa dansk kontroll över Sverige. Handlingen fick motsatt effekt och utlöste det uppror som bröt unionen."
+    },
+    {
+      "id": "se_p003",
+      "name": "Gustav II Adolf",
+      "born": 1594,
+      "died": 1632,
+      "initials": "GA",
+      "description": "Kung av Sverige 1611–1632, kallad 'Lejonet från Norden'. Under hans ledning blev Sverige en europeisk stormakt. Dödades i slaget vid Lützen 1632 och blev en av historiens mest omtalade krigarkungarna."
+    },
+    {
+      "id": "se_p004",
+      "name": "Axel Oxenstierna",
+      "born": 1583,
+      "died": 1654,
+      "initials": "AO",
+      "description": "Rikskansler under Gustav II Adolf och sedan förmyndare för drottning Kristina. En av de mest inflytelserika statsmännen i svensk historia. Ledde Sverige genom stora delar av Trettioåriga kriget efter kungens död."
+    },
+    {
+      "id": "se_p005",
+      "name": "Karl X Gustav",
+      "born": 1622,
+      "died": 1660,
+      "initials": "KXG",
+      "description": "Kung av Sverige 1654–1660. Ledde de spektakulära vinterfälttågen över de danska sunden 1658 och tvingade Danmark att avträda Skåne, Blekinge och Halland i freden i Roskilde."
+    },
+    {
+      "id": "se_p006",
+      "name": "Karl XI",
+      "born": 1655,
+      "died": 1697,
+      "initials": "K11",
+      "description": "Kung av Sverige 1660–1697. Besegrade Danmark vid Lund 1676 och genomförde sedan den stora reduktionen – återförde adelns gods till kronan och skapade en starkare centralmakt."
+    },
+    {
+      "id": "se_p007",
+      "name": "Karl XII",
+      "born": 1682,
+      "died": 1718,
+      "initials": "K12",
+      "description": "Kung av Sverige 1697–1718. Militärt genial men strategiskt kostsam. Vann spektakulära segrar vid Narva och Kliszów men förlorade allt vid Poltava 1709. Sköts vid belägringen av Fredrikshald under oklara omständigheter."
+    },
+    {
+      "id": "se_p008",
+      "name": "Peter den Store",
+      "born": 1672,
+      "died": 1725,
+      "initials": "PdS",
+      "description": "Tsar av Ryssland 1682–1725. Moderniserade Ryssland efter västerländsk modell. Besegrades katastrofalt av Karl XII vid Narva men använde nederlaget för att reformera sin armé och segrade slutligen vid Poltava 1709."
+    },
+    {
+      "id": "se_p009",
+      "name": "Magnus Stenbock",
+      "born": 1665,
+      "died": 1717,
+      "initials": "MS",
+      "description": "Svensk fältmarskalk och en av Karl XII:s främsta generaler. Vann den sista svenska storsegern vid Gadebusch 1712 men kapitulerade sedan vid Tönning 1713 och dog i dansk fångenskap."
+    },
+    {
+      "id": "se_p010",
+      "name": "Ulrika Eleonora",
+      "born": 1688,
+      "died": 1741,
+      "initials": "UE",
+      "description": "Drottning av Sverige 1718–1720, syster till Karl XII. Abdikerade till förmån för sin make Fredrik I. Under hennes korta regering inleddes arbetet med den nya frihetstida författningen som begränsade kungamakten."
+    },
+    {
+      "id": "se_p011",
+      "name": "Arvid Horn",
+      "born": 1664,
+      "died": 1742,
+      "initials": "AH",
+      "description": "Ledande statsman under frihetstiden och ledare för mösspartiet. Förespråkade fred och återhållsamhet efter stormaktstidens kostsamma krig. Dominerade svensk politik under 1720-talet."
+    },
+    {
+      "id": "se_p012",
+      "name": "Gustaf III",
+      "born": 1746,
+      "died": 1792,
+      "initials": "G3",
+      "description": "Kung av Sverige 1771–1792. Genomförde statskupp 1772 och återupprättade kungamakten. Kulturellt briljant men politiskt kontroversiell. Startade krig mot Ryssland 1788 och mördades på en maskeradbal 1792."
+    },
+    {
+      "id": "se_p013",
+      "name": "Gustaf IV Adolf",
+      "born": 1778,
+      "died": 1837,
+      "initials": "G4",
+      "description": "Kung av Sverige 1792–1809. Envist antinapoleonsk och förde Sverige in i katastrofala krig. Förlorade Finland till Ryssland 1809 och avsattes i en militärkupp samma år – den siste svenska kungen att avsättas."
+    },
+    {
+      "id": "se_p014",
+      "name": "Jean-Baptiste Bernadotte",
+      "born": 1763,
+      "died": 1844,
+      "initials": "JB",
+      "description": "Fransk marskalk under Napoleon, vald till svensk kronprins 1810 som Karl Johan. Vände Sverige mot Napoleon, erövrade Norge från Danmark 1814 och slöt fred. Blev kung Karl XIV Johan 1818."
+    },
+    {
+      "id": "se_p015",
+      "name": "Lennart Torstenson",
+      "born": 1603,
+      "died": 1651,
+      "initials": "LT",
+      "description": "Svensk fältmarskalk, en av de skickligaste i Trettioåriga kriget. Känd för sina snabba marscher och offensiva artilleriföring. Ledde det svenska angreppet på Danmark 1643–1645 i det så kallade Torstensonkriget."
+    },
+    {
+      "id": "se_p016",
+      "name": "Ivan Mazepa",
+      "born": 1639,
+      "died": 1709,
+      "initials": "IM",
+      "description": "Kosackhetman i Ukraina, allierade sig med Karl XII mot Peter den Store inför Poltava-kampanjen. Hoppades på ett självständigt Ukraina men alliansen slutade i katastrof vid Poltava 1709."
+    },
+    {
+      "id": "se_p017",
+      "name": "Fredrik I",
+      "born": 1676,
+      "died": 1751,
+      "initials": "F1",
+      "description": "Kung av Sverige 1720–1751. Makten låg reellt hos riksrådet under frihetstiden. Sverige förlorade stormaktsställningen under hans tid men upplevde också en period av relativ fred och ekonomisk återhämtning."
+    },
+    {
+      "id": "se_p018",
+      "name": "Kristina",
+      "born": 1626,
+      "died": 1689,
+      "initials": "KR",
+      "description": "Drottning av Sverige 1632–1654, dotter till Gustav II Adolf. Excentrisk och bildad regent som avslutade Trettioåriga kriget med freden i Westfalen 1648. Abdikerade frivilligt, konverterade till katolicismen och levde resten av livet i Rom."
+    }
+  ],
+  "events": [
+    {
+      "id": "se_e001",
+      "type": "event",
+      "era": "frigoerelsen",
+      "name": "Stockholms blodbad",
+      "date": "8–9 november 1520",
+      "year": 1520,
+      "lat": 59.325,
+      "lng": 18.071,
+      "modern_location": "Stockholm, Sverige",
+      "historical_context": "Kalmarunionen, 1520",
+      "description": "Kung Kristian II av Danmark lät avrätta uppemot 90 personer – biskopar, adelsmän och borgare – på Stortorget i Stockholm. Det var ett försök att befästa dansk kontroll genom terror. Handlingen fick rakt motsatt effekt: den utlöste ett uppror som för alltid bröt Sverige ur Kalmarunionen.",
+      "person_ids": [
+        "se_p002",
+        "se_p001"
+      ],
+      "person_roles": {
+        "se_p002": "Beordrade massakern",
+        "se_p001": "Förlorade sin far i blodbadet, ledde upproret som följde"
+      }
+    },
+    {
+      "id": "se_e002",
+      "type": "event",
+      "era": "frigoerelsen",
+      "name": "Gustav Vasa väljs till kung",
+      "date": "6 juni 1523",
+      "year": 1523,
+      "lat": 57.782,
+      "lng": 14.156,
+      "modern_location": "Strängnäs, Sverige",
+      "historical_context": "Sverige, 1523",
+      "description": "Gustav Vasa väljs till kung av Sverige på riksdagen i Strängnäs. Sverige bröt officiellt ur Kalmarunionen och Danmark förlorade kontrollen över riket. Den 6 juni firas idag som Sveriges nationaldag.",
+      "person_ids": [
+        "se_p001"
+      ],
+      "person_roles": {
+        "se_p001": "Vald till kung, grundare av Vasadynastin"
+      }
+    },
+    {
+      "id": "se_e003",
+      "type": "event",
+      "era": "frigoerelsen",
+      "name": "Reformationen genomförs",
+      "date": "1527",
+      "year": 1527,
+      "lat": 59.325,
+      "lng": 18.071,
+      "modern_location": "Västerås, Sverige",
+      "historical_context": "Kungariket Sverige, 1527",
+      "description": "På riksdagen i Västerås bröt Sverige med Rom och kyrkan underställdes kronan. Kyrkans gods konfiskerades och gav Gustav Vasa den ekonomiska bas han behövde för att konsolidera makten. En av de mest omvälvande politiska förändringarna i svensk historia.",
+      "person_ids": [
+        "se_p001"
+      ],
+      "person_roles": {
+        "se_p001": "Drev igenom reformationen av politiska och ekonomiska skäl"
+      }
+    },
+    {
+      "id": "se_e004",
+      "type": "battle",
+      "era": "expansion",
+      "name": "Nordiska sjuårskriget börjar",
+      "date": "1563",
+      "year": 1563,
+      "lat": 56.046,
+      "lng": 12.694,
+      "modern_location": "Helsingborg, Sverige",
+      "historical_context": "Kungariket Sverige, 1563",
+      "description": "Sverige hamnade i krig mot Danmark, Lübeck och Polen i ett av de blodigaste nordiska krigen på 1500-talet. Konflikten handlade om kontrollen över Östersjöhandeln och de strategiska sunden. Kriget slutade i status quo 1570 men kostade enormt i liv och resurser.",
+      "person_ids": [],
+      "person_roles": {}
+    },
+    {
+      "id": "se_e005",
+      "type": "battle",
+      "era": "expansion",
+      "name": "Slaget i Kalmar sund",
+      "date": "31 maj – 1 juni 1611",
+      "year": 1611,
+      "lat": 56.661,
+      "lng": 16.362,
+      "modern_location": "Kalmar sund, Sverige",
+      "historical_context": "Kalmarkriget, 1611",
+      "description": "Danmark angrep Sverige i Kalmarkriget och tog Kalmar fästning. Det var ett av de tyngre nederlaget för Sverige under denna period. Det unga Karl II:s (senare Gustav II Adolf) första eldprov som ledare.",
+      "person_ids": [
+        "se_p003"
+      ],
+      "person_roles": {
+        "se_p003": "Ung kung på sitt första fälttåg"
+      }
+    },
+    {
+      "id": "se_e006",
+      "type": "battle",
+      "era": "stormakt",
+      "name": "Slaget vid Breitenfeld",
+      "date": "17 september 1631",
+      "year": 1631,
+      "lat": 51.427,
+      "lng": 12.373,
+      "modern_location": "Breitenfeld, Tyskland",
+      "historical_context": "Det Heliga Romerska Riket, 1631",
+      "description": "Sveriges första stora seger i Trettioåriga kriget och en av de viktigaste protestanska segrarna i hela konflikten. Gustav II Adolf besegrade den kejserliga armén och förvandlade Sverige till Europas ledande militärmakt. Segern räddade den protestantiska saken i Tyskland.",
+      "person_ids": [
+        "se_p003"
+      ],
+      "person_roles": {
+        "se_p003": "Överbefälhavare, avgörande seger"
+      },
+      "route": [
+        {
+          "lat": 56.16,
+          "lng": 15.59,
+          "label": "Kalmar – embarkeringen"
+        },
+        {
+          "lat": 54.09,
+          "lng": 13.38,
+          "label": "Peenemünde – landstigning i Tyskland"
+        },
+        {
+          "lat": 52.52,
+          "lng": 13.41,
+          "label": "Berlin-trakten – alliansen med Brandenburg"
+        },
+        {
+          "lat": 51.43,
+          "lng": 12.37,
+          "label": "Breitenfeld – den avgörande segern"
+        }
+      ],
+      "route_description": "Sveriges inträde i Trettioåriga kriget – landstigning och marsch söderut"
+    },
+    {
+      "id": "se_e007",
+      "type": "battle",
+      "era": "stormakt",
+      "name": "Slaget vid Lützen",
+      "date": "16 november 1632",
+      "year": 1632,
+      "lat": 51.252,
+      "lng": 12.141,
+      "modern_location": "Lützen, Tyskland",
+      "historical_context": "Det Heliga Romerska Riket, 1632",
+      "description": "Sverige vann slaget men förlorade sin kung. Gustav II Adolf sköts under drabbningen och dog på slagfältet. Hans död chockade hela Europa. Trots förlusten av kungen höll den svenska armén och segrade – men stormaktsprojektet förlorade sin drivande kraft.",
+      "person_ids": [
+        "se_p003",
+        "se_p004"
+      ],
+      "person_roles": {
+        "se_p003": "Kung av Sverige, stupade i striden",
+        "se_p004": "Övertog ledningen av Sverige och kriget efter kungens död"
+      }
+    },
+    {
+      "id": "se_e008",
+      "type": "event",
+      "era": "stormakt",
+      "name": "Freden i Westfalen",
+      "date": "24 oktober 1648",
+      "year": 1648,
+      "lat": 51.962,
+      "lng": 7.625,
+      "modern_location": "Osnabrück/Münster, Tyskland",
+      "historical_context": "Det Heliga Romerska Riket, 1648",
+      "description": "Trettioåriga kriget avslutades. Sverige fick betydande territorier i norra Tyskland och erkändes som en av Europas stormakter. Freden i Westfalen anses ofta som startpunkten för det moderna statssystemet i Europa.",
+      "person_ids": [
+        "se_p004",
+        "se_p018"
+      ],
+      "person_roles": {
+        "se_p004": "Ledde de svenska förhandlingarna",
+        "se_p018": "Drottning av Sverige, ratificerade freden"
+      }
+    },
+    {
+      "id": "se_e009",
+      "type": "battle",
+      "era": "stormakt",
+      "name": "Torstensonkriget mot Danmark",
+      "date": "1643–1645",
+      "year": 1643,
+      "lat": 56.15,
+      "lng": 10.22,
+      "modern_location": "Jylland, Danmark",
+      "historical_context": "Kungariket Danmark, 1643",
+      "description": "Sverige angrep Danmark utan förklaring och Lennart Torstensons armé marscherade blixtsnabbt genom Jylland. Kriget slutade med freden i Brömsebro 1645 där Danmark avträdde Gotland, Ösel och Jämtland till Sverige – ett stort steg mot svensk dominans i Norden.",
+      "person_ids": [
+        "se_p015"
+      ],
+      "person_roles": {
+        "se_p015": "Överbefälhavare för den svenska armén"
+      },
+      "route": [
+        {
+          "lat": 55.71,
+          "lng": 13.19,
+          "label": "Malmö – utgångspunkt"
+        },
+        {
+          "lat": 55.47,
+          "lng": 9.47,
+          "label": "Kolding, Jylland"
+        },
+        {
+          "lat": 56.46,
+          "lng": 9.98,
+          "label": "Viborg, norra Jylland"
+        },
+        {
+          "lat": 57.05,
+          "lng": 9.92,
+          "label": "Ålborg – armén kontrollerar Jylland"
+        }
+      ],
+      "route_description": "Torstensons blixtkrig – armén svepte genom Jylland på rekordtid"
+    },
+    {
+      "id": "se_e010",
+      "type": "battle",
+      "era": "stormakt",
+      "name": "Tåget över Bält",
+      "date": "januari–februari 1658",
+      "year": 1658,
+      "lat": 55.45,
+      "lng": 10.5,
+      "modern_location": "Lilla Bält och Stora Bält, Danmark",
+      "historical_context": "Kungariket Danmark, 1658",
+      "description": "En av historiens mest djärvaste militära manövrar. Karl X Gustav ledde sin armé till fots över de frusna danska sunden under vintern. Det var ett drag ingen danskt befäl ansåg möjligt. Rörelsen kringgick alla danska försvar och tvingade Danmark till förhandlingsbordet.",
+      "person_ids": [
+        "se_p005"
+      ],
+      "person_roles": {
+        "se_p005": "Kung av Sverige, planerade och ledde den riskfyllda manövern"
+      },
+      "route": [
+        {
+          "lat": 55.6,
+          "lng": 13.0,
+          "label": "Malmö – armén samlas"
+        },
+        {
+          "lat": 55.49,
+          "lng": 9.75,
+          "label": "Kolding, Fyn-sidan"
+        },
+        {
+          "lat": 55.39,
+          "lng": 10.38,
+          "label": "Fyn – Lilla Bält korsas"
+        },
+        {
+          "lat": 55.46,
+          "lng": 11.56,
+          "label": "Sprogø – mitt på Stora Bält"
+        },
+        {
+          "lat": 55.53,
+          "lng": 11.99,
+          "label": "Korsör, Själland – isen håller"
+        },
+        {
+          "lat": 55.64,
+          "lng": 12.08,
+          "label": "Roskilde – Danmark ger upp"
+        }
+      ],
+      "route_description": "Marschen över isen – ett drag ingen danskt befäl ansåg möjligt"
+    },
+    {
+      "id": "se_e011",
+      "type": "event",
+      "era": "stormakt",
+      "name": "Freden i Roskilde",
+      "date": "26 februari 1658",
+      "year": 1658,
+      "lat": 55.641,
+      "lng": 12.08,
+      "modern_location": "Roskilde, Danmark",
+      "historical_context": "Kungariket Danmark, 1658",
+      "description": "Danmark tvingades avträda Skåne, Blekinge, Halland, Bornholm och Trondheims len till Sverige. Det var Sveriges territoriella höjdpunkt och skapade i stort sett den moderna svenska-danska gränsen. Bornholm och Trondheim återfick Danmark kort därefter, men Skåne förblev svenskt.",
+      "person_ids": [
+        "se_p005"
+      ],
+      "person_roles": {
+        "se_p005": "Kung av Sverige, dikterade fredsvillkoren"
+      }
+    },
+    {
+      "id": "se_e012",
+      "type": "battle",
+      "era": "stormakt",
+      "name": "Slaget vid Lund",
+      "date": "4 december 1676",
+      "year": 1676,
+      "lat": 55.705,
+      "lng": 13.19,
+      "modern_location": "Lund, Sverige",
+      "historical_context": "Skåne, Sverige (nyligen erövrat från Danmark), 1676",
+      "description": "Det blodigaste slaget i Skandinaviens historia. Danmark hade återtagit stora delar av Skåne och hotade att vinna tillbaka provinsen. Karl XI mötte den danska armén utanför Lund. Uppskattningsvis 9 000 soldater dödades under några timmar. Sverige segrade och behöll Skåne.",
+      "person_ids": [
+        "se_p006"
+      ],
+      "person_roles": {
+        "se_p006": "Kung av Sverige, ledde personligen kavalleriet till seger"
+      }
+    },
+    {
+      "id": "se_e013",
+      "type": "battle",
+      "era": "stormakt",
+      "name": "Slaget vid Landskrona",
+      "date": "14 juli 1677",
+      "year": 1677,
+      "lat": 55.871,
+      "lng": 12.83,
+      "modern_location": "Landskrona, Sverige",
+      "historical_context": "Skåne, Sverige, 1677",
+      "description": "Karl XI besegrade återigen den danska armén, nu vid Landskrona. Segern befäste svensk kontroll över Skåne definitivt. Danmarks sista realistiska chans att återta de förlorade provinserna gick om intet.",
+      "person_ids": [
+        "se_p006"
+      ],
+      "person_roles": {
+        "se_p006": "Kung av Sverige, segrare"
+      }
+    },
+    {
+      "id": "se_e014",
+      "type": "event",
+      "era": "stormakt",
+      "name": "Den stora reduktionen",
+      "date": "1680",
+      "year": 1680,
+      "lat": 59.325,
+      "lng": 18.071,
+      "modern_location": "Stockholm, Sverige",
+      "historical_context": "Kungariket Sverige, 1680",
+      "description": "Karl XI genomförde reduktionen – återförde adelns gods till kronan. En fjärdedel av Sveriges jord bytte ägare. Det var en av de mest genomgripande ekonomiska reformerna i svensk historia och skapade den finansiella bas som Karl XII senare spenderade på krigen.",
+      "person_ids": [
+        "se_p006"
+      ],
+      "person_roles": {
+        "se_p006": "Kung av Sverige, drev igenom reformen mot adelns motstånd"
+      }
+    },
+    {
+      "id": "se_e015",
+      "type": "battle",
+      "era": "stormakt",
+      "name": "Slaget vid Narva",
+      "date": "20 november 1700",
+      "year": 1700,
+      "lat": 59.377,
+      "lng": 28.177,
+      "modern_location": "Narva, Estland",
+      "historical_context": "Svenska Estland, 1700",
+      "description": "Stora Nordiska krigets första stora slag. Med 10 000 man besegrade Karl XII en rysk armé på 40 000 under Peter den Store. En av de mest imponerande segrarna i europeisk militärhistoria. Men segern var bedräglig – den gav Peter den Store tid att reformera sin armé.",
+      "person_ids": [
+        "se_p007",
+        "se_p008"
+      ],
+      "person_roles": {
+        "se_p007": "Kung av Sverige, 18 år gammal, segerrik befälhavare",
+        "se_p008": "Tsar av Ryssland, besegrad och tvingad att fly"
+      },
+      "route": [
+        {
+          "lat": 59.33,
+          "lng": 18.07,
+          "label": "Stockholm – armén mobiliseras"
+        },
+        {
+          "lat": 59.44,
+          "lng": 24.75,
+          "label": "Tallinn (Reval) – landstigning"
+        },
+        {
+          "lat": 59.38,
+          "lng": 28.18,
+          "label": "Narva – ryska belägringen bryts"
+        }
+      ],
+      "route_description": "Karl XII:s snabba marsch för att undsätta Narva"
+    },
+    {
+      "id": "se_e016",
+      "type": "battle",
+      "era": "stormakt",
+      "name": "Slaget vid Kliszów",
+      "date": "19 juli 1702",
+      "year": 1702,
+      "lat": 50.317,
+      "lng": 20.583,
+      "modern_location": "Kliszów, Polen",
+      "historical_context": "Kungariket Polen, 1702",
+      "description": "Karl XII besegrade den sachsisk-polska armén och ockuperade Warszawa och Kraków. Sverige kontrollerade nu stora delar av Polen och Karl installerade en ny kung på den polska tronen. Det verkade som det svenska stormaktsimperiet nådde sin topp.",
+      "person_ids": [
+        "se_p007"
+      ],
+      "person_roles": {
+        "se_p007": "Kung av Sverige, segerrik i en lång rad polska fälttåg"
+      }
+    },
+    {
+      "id": "se_e017",
+      "type": "battle",
+      "era": "stormakt",
+      "name": "Slaget vid Poltava",
+      "date": "8 juli 1709",
+      "year": 1709,
+      "lat": 49.588,
+      "lng": 34.55,
+      "modern_location": "Poltava, Ukraina",
+      "historical_context": "Det ryska tsarriket, 1709",
+      "description": "Stormaktstidens avgörande vändpunkt. Karl XII hade marscherat in i det ryska tsarriket i vad som idag är Ukraina, försvagad av den hårdaste vintern på decennier. Den svenska armén – utmattad, underbemannad och utan ammunition – krossades av Peter den Stores numerärt överlägsna styrkor. Sverige förlorade 9 000 man och 14 000 kapitulerade. Karl flydde till det Osmanska riket. Det var stormaktstidens slut.",
+      "person_ids": [
+        "se_p007",
+        "se_p008",
+        "se_p016"
+      ],
+      "person_roles": {
+        "se_p007": "Kung av Sverige, sårad och besegrad, flydde till Osmanska riket",
+        "se_p008": "Tsar av Ryssland, segrare – hämnades Narva",
+        "se_p016": "Kosackhetman, Karl XII:s ukrainske allierade"
+      },
+      "route": [
+        {
+          "lat": 52.23,
+          "lng": 21.01,
+          "label": "Warszawa – utgångspunkt 1708"
+        },
+        {
+          "lat": 52.4,
+          "lng": 30.99,
+          "label": "Homel – in i Ryssland"
+        },
+        {
+          "lat": 51.5,
+          "lng": 33.97,
+          "label": "Baturyn – Mazepas säte bränns av Peter"
+        },
+        {
+          "lat": 50.45,
+          "lng": 34.52,
+          "label": "Vinter 1708–09 – den stora frosten"
+        },
+        {
+          "lat": 49.59,
+          "lng": 34.55,
+          "label": "Poltava – katastrofen"
+        }
+      ],
+      "route_description": "Den ödesdigra marschen in i Ukraina – genom den värsta vintern på ett sekel"
+    },
+    {
+      "id": "se_e018",
+      "type": "battle",
+      "era": "stormakt",
+      "name": "Slaget vid Gadebusch",
+      "date": "20 december 1712",
+      "year": 1712,
+      "lat": 53.703,
+      "lng": 11.117,
+      "modern_location": "Gadebusch, Tyskland",
+      "historical_context": "Hertigdömet Mecklenburg, 1712",
+      "description": "Sveriges sista stora seger i Stora Nordiska kriget. Magnus Stenbock besegrade en dansk-sachsisk armé i norra Tyskland. Men segern var strategiskt meningslös – Sverige var omringat på alla fronter och Stenbock kapitulerade året därpå vid Tönning.",
+      "person_ids": [
+        "se_p009"
+      ],
+      "person_roles": {
+        "se_p009": "Svensk fältmarskalk, vann den sista svenska storsegern"
+      }
+    },
+    {
+      "id": "se_e019",
+      "type": "event",
+      "era": "fall",
+      "name": "Karl XII skjuts vid Fredrikshald",
+      "date": "30 november 1718",
+      "year": 1718,
+      "lat": 59.128,
+      "lng": 11.387,
+      "modern_location": "Halden, Norge",
+      "historical_context": "Norge (dansk), 1718",
+      "description": "Under belägringen av den norska fästningen Fredrikshald sköts Karl XII i huvudet i ett löpgravssystem. Omständigheterna är fortfarande historiskt omtvistade – var det ett fientligt skott eller ett attentat? Med hans död upphörde Sverige att föra krig och stormaktsepoken tog slut.",
+      "person_ids": [
+        "se_p007"
+      ],
+      "person_roles": {
+        "se_p007": "Kung av Sverige, stupade under oklara omständigheter"
+      },
+      "route": [
+        {
+          "lat": 49.59,
+          "lng": 34.55,
+          "label": "Poltava – flykten börjar"
+        },
+        {
+          "lat": 47.84,
+          "lng": 35.14,
+          "label": "Zaporizjzja – passerar Dnjepr"
+        },
+        {
+          "lat": 46.84,
+          "lng": 29.64,
+          "label": "Bender, Moldavien – osmaniskt skydd"
+        },
+        {
+          "lat": 57.71,
+          "lng": 11.97,
+          "label": "Stralsund – återvänder 1714"
+        },
+        {
+          "lat": 59.13,
+          "lng": 11.39,
+          "label": "Fredrikshald – sköts 1718"
+        }
+      ],
+      "route_description": "Karl XII:s extraordinära flykt – från Poltava till osmanerna och slutligen hem"
+    },
+    {
+      "id": "se_e020",
+      "type": "event",
+      "era": "fall",
+      "name": "Freden i Nystad",
+      "date": "10 september 1721",
+      "year": 1721,
+      "lat": 60.801,
+      "lng": 21.375,
+      "modern_location": "Uusikaupunki, Finland",
+      "historical_context": "Kungariket Sverige, 1721",
+      "description": "Stora Nordiska krigets slutliga uppgörelse. Sverige tvingades avträda Estland, Livland, Ingermanland och delar av Karelen till Ryssland. Det var ett av de mest kännbara territoriella förlusterna i svensk historia och markerade officiellt slutet på stormaktstiden. Ryssland tog över rollen som Östersjöns dominerande makt.",
+      "person_ids": [
+        "se_p010",
+        "se_p008"
+      ],
+      "person_roles": {
+        "se_p010": "Drottning av Sverige, ratificerade freden",
+        "se_p008": "Tsar av Ryssland, tog emot de baltiska provinserna"
+      }
+    },
+    {
+      "id": "se_e021",
+      "type": "event",
+      "era": "frihetstid",
+      "name": "Frihetstiden inleds – ny författning",
+      "date": "1720",
+      "year": 1720,
+      "lat": 59.325,
+      "lng": 18.071,
+      "modern_location": "Stockholm, Sverige",
+      "historical_context": "Kungariket Sverige, 1720",
+      "description": "Efter Karl XII:s död och stormaktstidens kostsamma krig förlorade kungamakten sin absoluta ställning. En ny regeringsform gav riksrådet och riksdagen makten. Sverige gick från envälde till en form av parlamentarisk styrelse – ovanligt för sin tid i Europa.",
+      "person_ids": [
+        "se_p010",
+        "se_p011"
+      ],
+      "person_roles": {
+        "se_p010": "Drottning, accepterade den begränsade kungamakten",
+        "se_p011": "Ledande politiker, arkitekt bakom den nya författningen"
+      }
+    },
+    {
+      "id": "se_e022",
+      "type": "battle",
+      "era": "frihetstid",
+      "name": "Hattarnas krig mot Ryssland",
+      "date": "1741–1743",
+      "year": 1741,
+      "lat": 60.45,
+      "lng": 25.1,
+      "modern_location": "Helsingfors, Finland",
+      "historical_context": "Svenska Finland, 1741",
+      "description": "Det krigsbejakande hattpartiet drev Sverige in i ett nytt krig mot Ryssland med förhoppning om att återta förlusterna från Nystad. Det slutade i katastrof. Sverige förlorade ytterligare territorium i Finland och tsarinan Elisabet dikterade fredsvillkoren. Kriget visade att stormaktstiden verkligen var förbi.",
+      "person_ids": [
+        "se_p017"
+      ],
+      "person_roles": {
+        "se_p017": "Kung av Sverige, förde ett krig han inte kunde vinna"
+      },
+      "route": [
+        {
+          "lat": 59.33,
+          "lng": 18.07,
+          "label": "Stockholm – mobilisering"
+        },
+        {
+          "lat": 60.39,
+          "lng": 25.67,
+          "label": "Helsingfors – anfall in i Finland"
+        },
+        {
+          "lat": 60.45,
+          "lng": 27.18,
+          "label": "Fredrikshamn – fronten"
+        }
+      ],
+      "route_description": "Hattarnas offensiv in i Finland – som snabbt slutade i katastrof"
+    },
+    {
+      "id": "se_e023",
+      "type": "event",
+      "era": "gustaviansk",
+      "name": "Gustaf III:s statskupp",
+      "date": "19 augusti 1772",
+      "year": 1772,
+      "lat": 59.325,
+      "lng": 18.071,
+      "modern_location": "Stockholm, Sverige",
+      "historical_context": "Kungariket Sverige, 1772",
+      "description": "Gustaf III genomförde en närmast oblodig statskupp och återupprättade kungamakten. Han omringade riksdagen med trupper och tvingade fram en ny regeringsform som gav kungen tillbaka den verkliga makten. Frihetstiden var slut. Gustaf III var karismatisk, kultiverad och briljant – men också djupt auktoritär.",
+      "person_ids": [
+        "se_p012"
+      ],
+      "person_roles": {
+        "se_p012": "Kung av Sverige, genomförde kuppen personligen"
+      }
+    },
+    {
+      "id": "se_e024",
+      "type": "battle",
+      "era": "gustaviansk",
+      "name": "Slaget vid Hogland",
+      "date": "17 juli 1788",
+      "year": 1788,
+      "lat": 60.467,
+      "lng": 26.983,
+      "modern_location": "Finska viken, internationellt vatten",
+      "historical_context": "Finska viken, 1788",
+      "description": "Gustaf III startade krig mot Ryssland utan riksdagens godkännande och den svenska flottan mötte ryssarna vid Hogland i Finska viken. Resultatet var oavgjort men kriget var politiskt katastrofalt – officerarna vägrade lyda order och bildade Anjalaförbundet mot kungen.",
+      "person_ids": [
+        "se_p012"
+      ],
+      "person_roles": {
+        "se_p012": "Kung av Sverige, initierade kriget"
+      }
+    },
+    {
+      "id": "se_e025",
+      "type": "battle",
+      "era": "gustaviansk",
+      "name": "Slaget vid Svensksund",
+      "date": "9–10 juli 1790",
+      "year": 1790,
+      "lat": 60.55,
+      "lng": 27.1,
+      "modern_location": "Kotka, Finland",
+      "historical_context": "Svenska Finland, 1790",
+      "description": "Sveriges största flottaktig sett till antalet fartyg och den mest lysande svenska sjösegren i modern tid. Gustaf III ledde personligen en galärflotta mot ryssarna i Finska viken och vann en fullständig seger. Kungen jublade men freden som följde gav inga territoriella vinster.",
+      "person_ids": [
+        "se_p012"
+      ],
+      "person_roles": {
+        "se_p012": "Kung av Sverige, ledde flottan personligen till seger"
+      },
+      "route": [
+        {
+          "lat": 60.15,
+          "lng": 25.0,
+          "label": "Helsingfors – flottan samlas"
+        },
+        {
+          "lat": 60.42,
+          "lng": 26.2,
+          "label": "Pyttis – galärerna formeras"
+        },
+        {
+          "lat": 60.55,
+          "lng": 27.1,
+          "label": "Svensksund – den avgörande segern"
+        }
+      ],
+      "route_description": "Gustaf III:s galärflotta seglar österut mot den ryska flottan"
+    },
+    {
+      "id": "se_e026",
+      "type": "event",
+      "era": "gustaviansk",
+      "name": "Gustaf III mördas på maskeradbal",
+      "date": "29 mars 1792",
+      "year": 1792,
+      "lat": 59.325,
+      "lng": 18.071,
+      "modern_location": "Stockholm, Sverige",
+      "historical_context": "Kungariket Sverige, 1792",
+      "description": "Gustaf III sköts på en maskeradbal på Operan i Stockholm av Jacob Johan Anckarström, en del av en adelskonspiracy. Han dog av sina sår tretton dagar senare. Mordet inspirerade senare Verdis opera Un ballo in maschera. Hans son Gustaf IV Adolf, bara 13 år, ärvde tronen.",
+      "person_ids": [
+        "se_p012"
+      ],
+      "person_roles": {
+        "se_p012": "Kung av Sverige, mördad på maskeraden"
+      }
+    },
+    {
+      "id": "se_e027",
+      "type": "battle",
+      "era": "gustaviansk",
+      "name": "Finska kriget – Ryssland invaderar",
+      "date": "februari 1808",
+      "year": 1808,
+      "lat": 60.45,
+      "lng": 25.1,
+      "modern_location": "Helsingfors, Finland",
+      "historical_context": "Svenska Finland, 1808",
+      "description": "Ryssland invaderade Finland i februari 1808 med Napoleons tysta samtycke. Gustaf IV Adolf vägrade kompromissa och förde ett katastrofalt krig. Den svenska armén retirerade hela vägen norrut och Finland föll i ryska händer. Det var den mest traumatiska territoriella förlusten i svensk historia.",
+      "person_ids": [
+        "se_p013"
+      ],
+      "person_roles": {
+        "se_p013": "Kung av Sverige, förde ett hopplöst försvarskrig"
+      },
+      "route": [
+        {
+          "lat": 60.72,
+          "lng": 28.75,
+          "label": "Viborg – ryska armén bryter upp"
+        },
+        {
+          "lat": 60.45,
+          "lng": 25.1,
+          "label": "Helsingfors – faller i mars 1808"
+        },
+        {
+          "lat": 61.49,
+          "lng": 23.77,
+          "label": "Tammerfors – armén trycks norrut"
+        },
+        {
+          "lat": 64.83,
+          "lng": 25.08,
+          "label": "Siikajoki – sista svenska motståndet"
+        }
+      ],
+      "route_description": "Det ryska framrycket – Sverige retirerade hela vägen norrut"
+    },
+    {
+      "id": "se_e028",
+      "type": "battle",
+      "era": "gustaviansk",
+      "name": "Slaget vid Siikajoki",
+      "date": "18 april 1808",
+      "year": 1808,
+      "lat": 64.833,
+      "lng": 25.083,
+      "modern_location": "Siikajoki, Finland",
+      "historical_context": "Norra Finland, 1808",
+      "description": "En av de få svenska segrarna under Finska kriget. Den svenska armén under Georg Carl von Döbeln stoppade det ryska framrycket tillfälligt i norra Finland. Men det förändrade inte krigets utgång – Ryssland hade överväldigande resurser och Finland var strategiskt förlorat.",
+      "person_ids": [],
+      "person_roles": {}
+    },
+    {
+      "id": "se_e029",
+      "type": "event",
+      "era": "gustaviansk",
+      "name": "Gustaf IV Adolf avsätts",
+      "date": "13 mars 1809",
+      "year": 1809,
+      "lat": 59.325,
+      "lng": 18.071,
+      "modern_location": "Stockholm, Sverige",
+      "historical_context": "Kungariket Sverige, 1809",
+      "description": "Militärofficerare grep Gustaf IV Adolf i en kupp och avsatte honom. Han var den siste svenska kungen att störtas från tronen. Hans farbror Karl XIII tog makten som en kompromiss, men var gammal och barnlös. Sverige behövde en ny tronföljare – och blickade oväntat mot Frankrike.",
+      "person_ids": [
+        "se_p013"
+      ],
+      "person_roles": {
+        "se_p013": "Kung av Sverige, avsatt i militärkupp, gick i exil"
+      }
+    },
+    {
+      "id": "se_e030",
+      "type": "event",
+      "era": "slutet",
+      "name": "Freden i Fredrikshamn – Finland förloras",
+      "date": "17 september 1809",
+      "year": 1809,
+      "lat": 60.567,
+      "lng": 27.2,
+      "modern_location": "Hamina, Finland",
+      "historical_context": "Finska viken, 1809",
+      "description": "Sverige tvingades formellt avträda hela Finland till Ryssland. Finland hade varit en del av Sverige i över 600 år. Förlusten var ett nationellt trauma utan like och omformade den svenska självbilden fundamentalt. Sverige var nu ett litet nordeuropeiskt kungarike – stormaktstiden ett minne.",
+      "person_ids": [],
+      "person_roles": {}
+    },
+    {
+      "id": "se_e031",
+      "type": "event",
+      "era": "slutet",
+      "name": "Bernadotte väljs till kronprins",
+      "date": "21 augusti 1810",
+      "year": 1810,
+      "lat": 58.592,
+      "lng": 16.185,
+      "modern_location": "Örebro, Sverige",
+      "historical_context": "Kungariket Sverige, 1810",
+      "description": "Den franske marskalken Jean-Baptiste Bernadotte valdes av riksdagen i Örebro till svensk kronprins – ett av historiens mer osannolika dynastiskiften. En napoleonsk general, som aldrig hade besökt Sverige, skulle nu leda landet. Han tog namnet Karl Johan och visade sig bli en av Sveriges mest framgångsrika statsöverhuvuden.",
+      "person_ids": [
+        "se_p014"
+      ],
+      "person_roles": {
+        "se_p014": "Fransk marskalk, vald till svensk kronprins"
+      }
+    },
+    {
+      "id": "se_e032",
+      "type": "battle",
+      "era": "slutet",
+      "name": "Slaget vid Leipzig – Sverige mot Napoleon",
+      "date": "16–19 oktober 1813",
+      "year": 1813,
+      "lat": 51.34,
+      "lng": 12.375,
+      "modern_location": "Leipzig, Tyskland",
+      "historical_context": "Sachsen, 1813",
+      "description": "Karl Johan ledde svenska trupper mot sin gamle chef Napoleon i 'Völkerschlacht' – Nationernas slag. Sverige stred som en del av den sjätte koalitionen och bidrog till Napoleons avgörande nederlag. Karl Johans agerande var strategiskt klokt men ansågs av vissa som ett förräderi mot Frankrike.",
+      "person_ids": [
+        "se_p014"
+      ],
+      "person_roles": {
+        "se_p014": "Kronprins av Sverige, överbefälhavare för Nordtyska armén"
+      }
+    },
+    {
+      "id": "se_e033",
+      "type": "battle",
+      "era": "slutet",
+      "name": "Karl Johan invaderar Danmark",
+      "date": "januari 1814",
+      "year": 1814,
+      "lat": 57.046,
+      "lng": 9.919,
+      "modern_location": "Jylland, Danmark",
+      "historical_context": "Kungariket Danmark, 1814",
+      "description": "Karl Johan marscherade in i Holstein och Jylland med en överlägsen armé. Danmark, som allierat sig med Napoleon, hade inget val. Trycket var omedelbart och effektivt. Inom veckor satt danskarna vid förhandlingsbordet.",
+      "person_ids": [
+        "se_p014"
+      ],
+      "person_roles": {
+        "se_p014": "Kronprins av Sverige, ledde invasionen"
+      },
+      "route": [
+        {
+          "lat": 53.55,
+          "lng": 10.0,
+          "label": "Hamburg-trakten – samlingsplats"
+        },
+        {
+          "lat": 54.31,
+          "lng": 10.13,
+          "label": "Kiel – in i Holstein"
+        },
+        {
+          "lat": 55.71,
+          "lng": 9.52,
+          "label": "Kolding – in i Jylland"
+        },
+        {
+          "lat": 57.05,
+          "lng": 9.92,
+          "label": "Ålborg – Danmark kapitulerar"
+        }
+      ],
+      "route_description": "Karl Johans snabba invasion – Danmark hade inget svar på den överlägsna armén"
+    },
+    {
+      "id": "se_e034",
+      "type": "event",
+      "era": "slutet",
+      "name": "Freden i Kiel – Norge till Sverige",
+      "date": "14 januari 1814",
+      "year": 1814,
+      "lat": 54.323,
+      "lng": 10.133,
+      "modern_location": "Kiel, Tyskland",
+      "historical_context": "Hertgidömet Holstein, 1814",
+      "description": "Danmark tvingades avträda Norge till Sverige i freden i Kiel – en direkt följd av Karl Johans invasion och Napoleons fall. Det avslutade formellt den långa konflikten mellan Sverige och Danmark som hade pågått i århundraden sedan Stockholms blodbad 1520. Berättelsens cirkel slöts.",
+      "person_ids": [
+        "se_p014"
+      ],
+      "person_roles": {
+        "se_p014": "Kronprins av Sverige, erhöll Norge som krigsvinst"
+      }
+    }
+  ]
+}

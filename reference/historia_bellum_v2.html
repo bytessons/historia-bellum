@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Historia Bellum</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow: hidden; background: #0f0e0b; }
+
+  body {
+    font-family: 'EB Garamond', serif;
+    color: #e8dfc8;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  /* ── TOP BAR ── */
+  .top-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 9px 20px;
+    background: #0a0908;
+    border-bottom: 1px solid #2e2618;
+    flex-shrink: 0;
+    z-index: 1000;
+  }
+  .logo {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    color: #c9a84c;
+    letter-spacing: 3px;
+    white-space: nowrap;
+  }
+  .logo span { color: #5a4a28; }
+  .era-pills { display: flex; gap: 5px; flex: 1; }
+  .era-pill {
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    border: 1px solid #2e2618;
+    background: transparent;
+    color: #7a6a4a;
+    cursor: pointer;
+    font-family: 'EB Garamond', serif;
+    transition: all 0.18s;
+    white-space: nowrap;
+  }
+  .era-pill:hover { color: #c9a84c; border-color: #5a4a28; }
+  .era-pill.active { color: #c9a84c; border-color: #c9a84c; background: #1a1508; }
+  .module-tag {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #3a3020;
+    border: 1px solid #2e2618;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .module-tag.active-mod { color: #c9a84c; border-color: #5a4a28; background: #1a1508; }
+
+  /* ── FILTER ROW ── */
+  .filter-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 20px;
+    background: #080807;
+    border-bottom: 1px solid #1e1a12;
+    flex-shrink: 0;
+    z-index: 1000;
+  }
+  .filter-label { font-size: 10px; letter-spacing: 1.5px; color: #3a3020; font-family: 'Cinzel', serif; margin-right: 4px; }
+  .filter-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 11px;
+    border-radius: 12px;
+    font-size: 12px;
+    border: 1px solid #1e1a12;
+    background: transparent;
+    color: #4a3f2a;
+    cursor: pointer;
+    font-family: 'EB Garamond', serif;
+    transition: all 0.18s;
+  }
+  .filter-btn:hover { border-color: #3a3020; color: #8a7a5a; }
+  .filter-btn.on.battles { color: #c04040; border-color: #6a2828; }
+  .filter-btn.on.events  { color: #7a9a4a; border-color: #4a6a28; }
+  .filter-btn.on.persons { color: #4a8aad; border-color: #284a6a; }
+  .fdot { width: 7px; height: 7px; border-radius: 50%; }
+  .battles .fdot { background: #c04040; }
+  .events  .fdot { background: #7a9a4a; }
+  .persons .fdot { background: #4a8aad; }
+
+  /* ── MAIN LAYOUT ── */
+  .main { display: flex; flex: 1; overflow: hidden; }
+
+  /* ── MAP ── */
+  #map {
+    flex: 1;
+    z-index: 1;
+  }
+
+  /* Leaflet overrides for dark theme */
+  .leaflet-tile-pane { filter: brightness(0.45) sepia(0.3) hue-rotate(10deg) saturate(0.6); }
+  .leaflet-control-zoom a {
+    background: #0a0908 !important;
+    color: #c9a84c !important;
+    border-color: #2e2618 !important;
+    font-family: 'Cinzel', serif !important;
+  }
+  .leaflet-control-zoom a:hover { background: #1a1508 !important; }
+  .leaflet-control-attribution {
+    background: rgba(10,9,8,0.7) !important;
+    color: #3a3020 !important;
+    font-size: 9px !important;
+  }
+  .leaflet-control-attribution a { color: #5a4a28 !important; }
+
+  /* Custom markers */
+  .hb-marker {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    border: 2px solid rgba(0,0,0,0.5);
+    cursor: pointer;
+    transition: transform 0.15s;
+    position: relative;
+  }
+  .hb-marker.battle { background: #c04040; box-shadow: 0 0 8px rgba(192,64,64,0.4); }
+  .hb-marker.event  { background: #7a9a4a; box-shadow: 0 0 8px rgba(122,154,74,0.4); }
+  .hb-marker.person { background: #4a8aad; box-shadow: 0 0 8px rgba(74,138,173,0.4); }
+  .hb-marker.active { transform: scale(1.5); }
+  .hb-marker::after {
+    content: '';
+    position: absolute;
+    top: -5px; left: -5px; right: -5px; bottom: -5px;
+    border-radius: 50%;
+    border: 1px solid currentColor;
+    opacity: 0;
+    animation: pulse 2s infinite;
+  }
+  .hb-marker.active::after { opacity: 1; }
+  @keyframes pulse {
+    0%   { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(1.8); opacity: 0; }
+  }
+
+  /* Leaflet tooltip overrides */
+  .hb-tooltip {
+    background: #0a0908 !important;
+    border: 1px solid #2e2618 !important;
+    border-radius: 4px !important;
+    color: #c8b890 !important;
+    font-family: 'EB Garamond', serif !important;
+    font-size: 12px !important;
+    padding: 4px 9px !important;
+    box-shadow: none !important;
+    white-space: nowrap;
+  }
+  .hb-tooltip::before { display: none !important; }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: 300px;
+    background: #0a0908;
+    border-left: 1px solid #2e2618;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex-shrink: 0;
+    z-index: 500;
+  }
+  .sidebar-header {
+    padding: 14px 18px;
+    border-bottom: 1px solid #1e1a12;
+  }
+  .sidebar-module {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #3a3020;
+    font-family: 'Cinzel', serif;
+    margin-bottom: 4px;
+  }
+  .sidebar-title { font-family: 'Cinzel', serif; font-size: 17px; color: #c9a84c; margin-bottom: 2px; }
+  .sidebar-sub { font-size: 13px; color: #4a3f2a; font-style: italic; }
+
+  .detail-panel { flex: 1; overflow-y: auto; padding: 18px; }
+  .detail-panel::-webkit-scrollbar { width: 2px; }
+  .detail-panel::-webkit-scrollbar-track { background: transparent; }
+  .detail-panel::-webkit-scrollbar-thumb { background: #2e2618; }
+
+  .empty-state {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    text-align: center;
+    color: #2e2618;
+  }
+  .empty-cross {
+    width: 28px; height: 28px;
+    position: relative;
+    opacity: 0.4;
+  }
+  .empty-cross::before, .empty-cross::after {
+    content: '';
+    position: absolute;
+    background: #c9a84c;
+    border-radius: 1px;
+  }
+  .empty-cross::before { width: 2px; height: 100%; left: 50%; transform: translateX(-50%); top: 0; }
+  .empty-cross::after  { width: 100%; height: 2px; top: 50%; transform: translateY(-50%); left: 0; }
+  .empty-text { font-size: 13px; font-style: italic; line-height: 1.7; color: #3a3020; max-width: 180px; }
+
+  .event-detail { display: none; }
+  .type-badge {
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    font-family: 'Cinzel', serif;
+    margin-bottom: 7px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    display: inline-block;
+  }
+  .type-badge.battle { color: #c04040; background: #1a0808; border: 1px solid #3a1818; }
+  .type-badge.event  { color: #7a9a4a; background: #0a1208; border: 1px solid #283a18; }
+  .type-badge.person { color: #4a8aad; background: #080e14; border: 1px solid #183048; }
+
+  .d-name { font-family: 'Cinzel', serif; font-size: 18px; color: #e8dfc8; line-height: 1.3; margin-bottom: 3px; }
+  .d-date { font-size: 13px; color: #4a3f2a; font-style: italic; margin-bottom: 14px; }
+  .d-text { font-size: 15px; line-height: 1.85; color: #a09070; }
+  .d-divider { border: none; border-top: 1px solid #1e1a12; margin: 14px 0; }
+
+  .related-header { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #3a3020; font-family: 'Cinzel', serif; margin-bottom: 10px; }
+  .person-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #14120e;
+  }
+  .person-avatar {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: #141208;
+    border: 1px solid #2e2618;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    color: #c9a84c;
+    flex-shrink: 0;
+  }
+  .person-name { font-size: 14px; color: #c8b890; }
+  .person-role { font-size: 12px; color: #4a3f2a; font-style: italic; }
+
+  /* ── TIMELINE ── */
+  .timeline-section {
+    padding: 10px 18px 14px;
+    border-top: 1px solid #1e1a12;
+    background: #080807;
+    flex-shrink: 0;
+  }
+  .tl-header { font-size: 9px; letter-spacing: 2px; color: #3a3020; font-family: 'Cinzel', serif; margin-bottom: 10px; }
+  .tl-track { position: relative; height: 24px; margin-bottom: 18px; }
+  .tl-line { position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: #1e1a12; }
+  .tl-dot {
+    position: absolute;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .tl-dot:hover { transform: translate(-50%, -50%) scale(1.6); }
+  .tl-dot.battle { background: #c04040; }
+  .tl-dot.event  { background: #7a9a4a; }
+  .tl-lbl {
+    position: absolute;
+    font-size: 9px;
+    color: #3a3020;
+    font-family: 'Cinzel', serif;
+    top: 16px;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+  .tl-legend { display: flex; gap: 14px; }
+  .tl-legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #3a3020; }
+  .tl-legend-dot { width: 7px; height: 7px; border-radius: 50%; }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <span class="logo">HISTORIA <span>·</span> BELLUM</span>
+  <div class="era-pills">
+    <button class="era-pill active" onclick="setEra('all',this)">Alla eror</button>
+    <button class="era-pill" onclick="setEra('forntid',this)">Forntid</button>
+    <button class="era-pill" onclick="setEra('vikingatid',this)">Vikingatid</button>
+    <button class="era-pill" onclick="setEra('medeltid',this)">Medeltid</button>
+    <button class="era-pill" onclick="setEra('stormaktstid',this)">Stormaktstid</button>
+  </div>
+  <span class="module-tag active-mod">SVERIGE</span>
+  <span class="module-tag">+ JAPAN</span>
+  <span class="module-tag">+ MODUL</span>
+</div>
+
+<!-- FILTER ROW -->
+<div class="filter-row">
+  <span class="filter-label">VISA</span>
+  <button class="filter-btn battles on" onclick="toggleFilter('battles',this)">
+    <span class="fdot"></span>Slag
+  </button>
+  <button class="filter-btn events on" onclick="toggleFilter('events',this)">
+    <span class="fdot"></span>Händelser
+  </button>
+  <button class="filter-btn persons on" onclick="toggleFilter('persons',this)">
+    <span class="fdot"></span>Nyckelpersoner
+  </button>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <div id="map"></div>
+
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-module">MODUL · SVERIGE</div>
+      <div class="sidebar-title">Svenska historien</div>
+      <div class="sidebar-sub">Klicka ett märke för att utforska</div>
+    </div>
+
+    <div class="detail-panel" id="detail-panel">
+      <div class="empty-state" id="empty-state">
+        <div class="empty-cross"></div>
+        <div class="empty-text">Klicka på ett slag, händelse eller person på kartan</div>
+      </div>
+      <div class="event-detail" id="event-detail">
+        <div class="type-badge" id="d-badge">Slag</div>
+        <div class="d-name" id="d-name"></div>
+        <div class="d-date" id="d-date"></div>
+        <div class="d-text" id="d-text"></div>
+        <hr class="d-divider" id="d-div" style="display:none">
+        <div id="d-persons"></div>
+      </div>
+    </div>
+
+    <div class="timeline-section">
+      <div class="tl-header">TIDSLINJE · SVERIGE</div>
+      <div class="tl-track">
+        <div class="tl-line"></div>
+        <div id="tl-dots"></div>
+      </div>
+      <div class="tl-legend">
+        <div class="tl-legend-item"><div class="tl-legend-dot" style="background:#c04040"></div>Slag</div>
+        <div class="tl-legend-item"><div class="tl-legend-dot" style="background:#7a9a4a"></div>Händelse</div>
+        <div class="tl-legend-item"><div class="tl-legend-dot" style="background:#4a8aad"></div>Person</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────
+const EVENTS = [
+  {
+    id: 1, type: 'battle', era: 'vikingatid',
+    name: 'Slaget vid Bråvalla',
+    date: 'ca 750 e.Kr.', year: 750,
+    lat: 58.35, lng: 16.5,
+    text: 'Ett av de mest omskrivna slagen i nordisk historia, utkämpat på Bråvallaheden i Östergötland. Kung Harald Hildetand mötte sin brorson Sigurd Ring med tusentals krigaresmed sig. Berättat i Gesta Danorum och flera fornnordiska sagor.',
+    persons: [
+      { init: 'HH', name: 'Harald Hildetand', role: 'Kung av Danmark och Sverige' },
+      { init: 'SR', name: 'Sigurd Ring',       role: 'Upprorsledare, segrare' }
+    ]
+  },
+  {
+    id: 2, type: 'event', era: 'vikingatid',
+    name: 'Birka grundas',
+    date: 'ca 750 e.Kr.', year: 748,
+    lat: 59.33, lng: 17.54,
+    text: 'Birka på Björkö i Mälaren grundas och blir Skandinaviens första stad. Platsen länkade handelsvägar från Ryssland och Bysans till Västeuropa och övergavs runt år 975 e.Kr. Idag ett UNESCO-världsarv.',
+    persons: [
+      { init: 'AN', name: 'Ansgar', role: 'Missionär, besökte Birka 829' }
+    ]
+  },
+  {
+    id: 3, type: 'event', era: 'vikingatid',
+    name: 'Rurik grundar Novgorod',
+    date: 'ca 862 e.Kr.', year: 862,
+    lat: 58.52, lng: 31.27,
+    text: 'Den svenske vikingen Rurik kallas in som furste av Novgorod och lägger grunden till det ryska riket. Varjagerna – östliga vikingar – etablerade handelsvägar längs de ryska floderna ner till Konstantinopel.',
+    persons: [
+      { init: 'RR', name: 'Rurik', role: 'Varjagfurste, grundare av Rus' }
+    ]
+  },
+  {
+    id: 4, type: 'event', era: 'medeltid',
+    name: 'Stockholms blodbad',
+    date: '8–9 november 1520', year: 1520,
+    lat: 59.325, lng: 18.071,
+    text: 'Kung Kristian II av Danmark lät avrätta uppemot 90 personer på Stortorget i Stockholm. Händelsen utlöste Gustav Vasas uppror och ledde till att Sverige bröt sig ur Kalmarunionen 1523.',
+    persons: [
+      { init: 'K2', name: 'Kristian II',  role: 'Kung av Danmark, beordrade massakern' },
+      { init: 'GV', name: 'Gustav Vasa',  role: 'Ledde frigörelsekampen' }
+    ]
+  },
+  {
+    id: 5, type: 'battle', era: 'stormaktstid',
+    name: 'Slaget vid Lund',
+    date: '4 december 1676', year: 1676,
+    lat: 55.705, lng: 13.19,
+    text: 'Det blodigaste slaget i Skandinaviens historia. Karl XI mötte Danmark utanför Lund i Skåne. Uppskattningsvis 9 000 soldater dödades under bara några timmar. Sverige segrade och behöll kontroll över Skåne.',
+    persons: [
+      { init: 'K11', name: 'Karl XI',    role: 'Kung av Sverige, segrare' },
+      { init: 'K5',  name: 'Kristian V', role: 'Kung av Danmark, besegrad' }
+    ]
+  },
+  {
+    id: 6, type: 'battle', era: 'stormaktstid',
+    name: 'Slaget vid Narva',
+    date: '20 november 1700', year: 1700,
+    lat: 59.377, lng: 28.177,
+    text: 'En av Karl XII:s mest spektakulära segrar. Med 10 000 man besegrades en rysk armé på 40 000 under Peter den Store. Segern befäste Sveriges stormaktsstatus men gav Peter tid att reformera och stärka sin armé.',
+    persons: [
+      { init: 'K12', name: 'Karl XII',        role: 'Kung av Sverige' },
+      { init: 'PdS', name: 'Peter den Store', role: 'Tsar av Ryssland' }
+    ]
+  },
+  {
+    id: 7, type: 'battle', era: 'stormaktstid',
+    name: 'Slaget vid Poltava',
+    date: '8 juli 1709', year: 1709,
+    lat: 49.588, lng: 34.55,
+    text: 'Stormaktstidens fall. Karl XII:s armé krossades utanför Poltava i nuvarande Ukraina. Sverige förlorade 9 000 man och ytterligare 14 000 kapitulerade. Karl flydde till det Osmanska riket. Det svenska imperiet i öster var förlorat.',
+    persons: [
+      { init: 'K12', name: 'Karl XII',        role: 'Kung av Sverige, besegrad' },
+      { init: 'PdS', name: 'Peter den Store', role: 'Tsar av Ryssland, segrare' },
+      { init: 'IM',  name: 'Ivan Mazepa',     role: 'Kosackhetman, Karl XII:s allierade' }
+    ]
+  },
+  {
+    id: 8, type: 'person', era: 'stormaktstid',
+    name: 'Karl XII',
+    date: '1682–1718', year: 1700,
+    lat: 59.335, lng: 18.065,
+    text: 'Kung av Sverige 1697–1718. Ledde Sverige under hela Stora Nordiska kriget mot Ryssland, Danmark-Norge och Sachsen-Polen. Känd för lysande men kostsamma militära äventyr. Sköts vid belägringen av Fredrikshald 1718.',
+    persons: []
+  },
+  {
+    id: 9, type: 'battle', era: 'forntid',
+    name: 'Slaget vid Gestilren',
+    date: 'ca 1000 e.Kr.', year: 1000,
+    lat: 59.2, lng: 15.2,
+    text: 'Kung Olof Skötkonung av Sverige besegrar sveakungen Styrbjörn Starke vid Gestilren i Närke. Händelsen markerar kristendomens tidiga fotfäste i Svealand och befäster Olofs makt över hela riket.',
+    persons: [
+      { init: 'OS', name: 'Olof Skötkonung', role: 'Kung av Sverige, segrare' },
+      { init: 'SS', name: 'Styrbjörn Starke', role: 'Pretendent, besegrad' }
+    ]
+  }
+];
+
+// ── STATE ─────────────────────────────────────────────────────────────────
+let filters = { battles: true, events: true, persons: true };
+let activeEra = 'all';
+let activeId  = null;
+let markers   = {};
+
+// ── MAP INIT ──────────────────────────────────────────────────────────────
+const map = L.map('map', {
+  center: [60, 18],
+  zoom: 5,
+  zoomControl: true,
+  attributionControl: true
+});
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap contributors',
+  maxZoom: 18
+}).addTo(map);
+
+// ── MARKER UTILS ──────────────────────────────────────────────────────────
+function makeIcon(type, isActive) {
+  const size = isActive ? 18 : 13;
+  return L.divIcon({
+    className: '',
+    html: `<div class="hb-marker ${type}${isActive ? ' active' : ''}" style="width:${size}px;height:${size}px;"></div>`,
+    iconSize: [size, size],
+    iconAnchor: [size/2, size/2]
+  });
+}
+
+function renderMarkers() {
+  // Remove old
+  Object.values(markers).forEach(m => map.removeLayer(m));
+  markers = {};
+
+  EVENTS.forEach(ev => {
+    const typeKey = ev.type === 'battle' ? 'battles' : ev.type === 'person' ? 'persons' : 'events';
+    if (!filters[typeKey]) return;
+    if (activeEra !== 'all' && ev.era !== activeEra) return;
+
+    const isActive = ev.id === activeId;
+    const m = L.marker([ev.lat, ev.lng], { icon: makeIcon(ev.type, isActive) })
+      .addTo(map)
+      .bindTooltip(ev.name, { className: 'hb-tooltip', direction: 'top', offset: [0, -8] })
+      .on('click', () => selectEvent(ev.id));
+
+    markers[ev.id] = m;
+  });
+}
+
+// ── TIMELINE ──────────────────────────────────────────────────────────────
+function renderTimeline() {
+  const container = document.getElementById('tl-dots');
+  container.innerHTML = '';
+  const shown = EVENTS.filter(ev => {
+    if (ev.type === 'person') return false;
+    const tk = ev.type === 'battle' ? 'battles' : 'events';
+    if (!filters[tk]) return false;
+    if (activeEra !== 'all' && ev.era !== activeEra) return false;
+    return true;
+  });
+  if (!shown.length) return;
+  const years = shown.map(e => e.year);
+  const mn = Math.min(...years), mx = Math.max(...years);
+  const range = mx - mn || 1;
+
+  shown.forEach(ev => {
+    const pct = ((ev.year - mn) / range) * 90 + 5;
+    const dot = document.createElement('div');
+    dot.className = 'tl-dot ' + ev.type;
+    dot.style.left = pct + '%';
+    dot.title = ev.name;
+    dot.addEventListener('click', () => selectEvent(ev.id));
+
+    const lbl = document.createElement('div');
+    lbl.className = 'tl-lbl';
+    lbl.style.left = pct + '%';
+    lbl.textContent = ev.year > 0 ? ev.year : Math.abs(ev.year) + ' f.Kr';
+
+    container.appendChild(dot);
+    container.appendChild(lbl);
+  });
+}
+
+// ── SELECT EVENT ──────────────────────────────────────────────────────────
+function selectEvent(id) {
+  activeId = id;
+  const ev = EVENTS.find(e => e.id === id);
+  if (!ev) return;
+
+  // Pan map
+  map.panTo([ev.lat, ev.lng], { animate: true, duration: 0.6 });
+
+  // Sidebar
+  document.getElementById('empty-state').style.display = 'none';
+  const det = document.getElementById('event-detail');
+  det.style.display = 'block';
+
+  const badge = document.getElementById('d-badge');
+  const labels = { battle: 'Slag', event: 'Händelse', person: 'Person' };
+  badge.textContent = labels[ev.type];
+  badge.className = 'type-badge ' + ev.type;
+
+  document.getElementById('d-name').textContent = ev.name;
+  document.getElementById('d-date').textContent = ev.date;
+  document.getElementById('d-text').textContent = ev.text;
+
+  const persDiv = document.getElementById('d-persons');
+  const divider = document.getElementById('d-div');
+  if (ev.persons && ev.persons.length) {
+    divider.style.display = '';
+    persDiv.innerHTML = '<div class="related-header">Nyckelpersoner</div>' +
+      ev.persons.map(p => `
+        <div class="person-row">
+          <div class="person-avatar">${p.init}</div>
+          <div>
+            <div class="person-name">${p.name}</div>
+            <div class="person-role">${p.role}</div>
+          </div>
+        </div>`).join('');
+  } else {
+    divider.style.display = 'none';
+    persDiv.innerHTML = '';
+  }
+
+  renderMarkers();
+  renderTimeline();
+}
+
+// ── CONTROLS ──────────────────────────────────────────────────────────────
+function setEra(era, btn) {
+  activeEra = era;
+  document.querySelectorAll('.era-pill').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeId = null;
+  document.getElementById('empty-state').style.display = '';
+  document.getElementById('event-detail').style.display = 'none';
+  renderMarkers();
+  renderTimeline();
+}
+
+function toggleFilter(type, btn) {
+  filters[type] = !filters[type];
+  btn.classList.toggle('on', filters[type]);
+  renderMarkers();
+  renderTimeline();
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────
+renderMarkers();
+renderTimeline();
+</script>
+</body>
+</html>

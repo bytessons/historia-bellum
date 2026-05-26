@@ -1,0 +1,93 @@
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 0 24px;
+  height: 52px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.topbar-logo {
+  flex-shrink: 0;
+}
+
+.logo-text {
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+}
+
+.topbar-eras {
+  display: flex;
+  gap: 6px;
+  flex: 1;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.topbar-eras::-webkit-scrollbar {
+  display: none;
+}
+
+.era-pill {
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-body);
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+
+.era-pill:hover {
+  border-color: var(--gold-dim);
+  color: var(--text-primary);
+}
+
+.era-pill.active {
+  background: var(--gold-dark);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.topbar-modules {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.module-btn {
+  padding: 4px 14px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-body);
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  transition: all 0.15s;
+}
+
+.module-btn:hover {
+  border-color: var(--gold-dim);
+  color: var(--text-primary);
+}
+
+.module-btn.active {
+  background: var(--gold-dark);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.module-add {
+  color: var(--text-muted);
+  border-style: dashed;
+}

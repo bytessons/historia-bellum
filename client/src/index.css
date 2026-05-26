@@ -1,0 +1,61 @@
+:root {
+  --bg-primary:    #0a0908;
+  --bg-secondary:  #12100c;
+  --bg-tertiary:   #1a1610;
+  --border:        #2e2618;
+  --border-subtle: #1e1a12;
+  --gold:          #c9a84c;
+  --gold-dim:      #7a6a4a;
+  --gold-dark:     #5a4a28;
+  --text-primary:  #e8dfc8;
+  --text-body:     #a09070;
+  --text-muted:    #4a3f2a;
+  --text-faint:    #3a3020;
+
+  --color-battle:  #c04040;
+  --color-event:   #7a9a4a;
+  --color-person:  #4a8aad;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 16px;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Leaflet map tile darkening */
+.leaflet-tile-pane {
+  filter: brightness(4) sepia(0.3) hue-rotate(50deg) saturate(1);
+}
+
+.leaflet-container {
+  background: var(--bg-primary);
+}
